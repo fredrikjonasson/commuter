@@ -8,35 +8,79 @@
 <body>
   <div class="container">
     <div class="row" style="justify-content:center;">
-      <h1>Departures from Uppsala to Stockholm</h1>
-      <h3 style="text-align:center">Below is the departures that are leaving Uppsala bound for Stockholm in the nearest hour.</h3>
+      <h1>Train-departures from Uppsala to Stockholm</h1>
+      <h3 style="text-align:center">Below is the train-departures that are leaving Uppsala bound for Stockholm in the nearest hour.</h3>
     </div>
     <div class="row"></div>
+    <style >
+    table{
+      background:#000;
+      border-spacing: 0px;
+      margin-bottom:0px;
+    }
+    th, td, h1, h6{
+      color: yellow;
+    }
 
-    <div id="app" style="width:100%;">
-      <div class="table-responsive">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col"><h1>Avgångstid</h1></th>
+    .table thead th{
+      border-bottom: 2px solid #222;
+    }
+    .table td{
+      border-top: 2px solid #222;
+      border-bottom: 2px solid #222;
+    }
+  </style>
+  <div id="app" style="width:100%;">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"><h1>Time</h1></th>
+            <th scope="col"><h1>Train</h1></th>
 
-              <th scope="col" style="text-align:center;"><h1>Spår</h1></th>
-            </tr>
-          </thead>
-          <tbody v-for="responses in apiResponse">
-            <tr>
-              <td><h1>{{responses.AdvertisedTimeAtLocation}}</h1></td>
+            <th scope="col" style="text-align:center;"><h1>Track</h1></th>
+            <th scope="col"><h1>Remarks</h1></th>
+            <th scope="col"><h1></h1></th>
+          </tr>
+        </thead>
+        <tbody v-for="responses in apiResponse">
+          <template v-if="responses.TrackAtLocation == 'x'">
+            <tr class="table-danger">
+              <td><h2>{{responses.AdvertisedTimeAtLocation}}</h2></td>
+              <td style=""><h2>{{responses.AdvertisedTrainIdent}}</h2></td>
+              <td style="text-align:center;"><h2>{{responses.TrackAtLocation}}</h2></td>
+              <template v-if="responses.OtherInformation">
+                <td><h6>{{responses.OtherInformation[0]}} <br> {{responses.OtherInformation[1]}} <br>
+                  {{responses.OtherInformation[2]}} </h6></td>
+                </template>
+                <template v-if="responses.Deviation">
+                <td><h6>{{responses.Deviation}}</h6></td>
+              </template>
+              </tr>
+            </template>
+            <template v-else>
+              <tr>
+                <td><h2>{{responses.AdvertisedTimeAtLocation}}</h2></td>
+                <td style=""><h2>{{responses.AdvertisedTrainIdent}}</h2></td>
+                <td style="text-align:center;"><h2>{{responses.TrackAtLocation}}</h2></td>
+                <template v-if="responses.OtherInformation">
+                  <td><h6>{{responses.OtherInformation[0]}} <br> {{responses.OtherInformation[1]}} <br>
+                    {{responses.OtherInformation[2]}} </h6></td>
+                  </template>
+                  <template v-if="responses.Deviation">
+                  <td><h6>{{responses.Deviation}}</h6></td>
+                </template>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+          <p><b>Disclaimer:</b> The following page and its information  in no way affiliated with any official train operators. Therefore the information viewed on the page should not be substituted for your travel operators official information channels. </p>
+        </div>
 
-              <td style="text-align:center;"><h1>{{responses.TrackAtLocation}}</h1></td>
-            </tr>
-          </tbody>
-        </table>
       </div>
-
     </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-  <script type="text/javascript" src="./script.js?5ddcc5jj4kkd4"></script>
-</body>
-</html>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    <script type="text/javascript" src="./script.js?5ddcc5jj4kkd4"></script>
+  </body>
+  </html>

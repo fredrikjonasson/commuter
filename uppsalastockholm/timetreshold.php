@@ -5,7 +5,7 @@ class Timetreshold{
 
   function __construct(){
     $this->CurrentTime = time();
-    $this->TresholdInMinutes = 5;
+    $this->TresholdInMinutes = 2;
   }
 
   function GetTimePassed($TimeOfLastApiCall){

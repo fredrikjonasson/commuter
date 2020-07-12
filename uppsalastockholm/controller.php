@@ -1,7 +1,7 @@
 <?php
-require('apirequest.php');
-require('databasehandler.php');
-require('timetreshold.php');
+require_once 'apirequest.php';
+//require_once('databasehandler.php');
+require_once 'timetreshold.php';
 
 class Controller{
 	private $DatabaseHandler;
@@ -22,15 +22,16 @@ class Controller{
 	function GetRequest(){
 		$TimeOfLastApiCall = $this->DatabaseHandler->ReturnLastCallTime();
 		if ($this->Timetreshold->IsTresholdReached($TimeOfLastApiCall)) {
-			echo("Reached");
+			echo($this->CallApi());
 		} else {
-			echo("Not reached");
+			echo($this->DatabaseHandler->ReturnLastApiAnswer());
 		}
 	}
 
 	function CallApi(){
-		$timeNow = time();
-		$timeOfLastCall = "Funktion här";
+		$apiCall = new ApiRequest();
+		$departures = $apiCall->AskApi();
+		return($departures);
 	}
 
 }

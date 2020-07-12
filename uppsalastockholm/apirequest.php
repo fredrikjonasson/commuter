@@ -1,4 +1,6 @@
 <?php
+require_once 'databasehandler.php';
+
 class ApiRequest {
   private $ApiQuestion;
   private $EndPoint;
@@ -34,17 +36,29 @@ class ApiRequest {
     $this->EndPoint = "https://api.trafikinfo.trafikverket.se/v2/data.json";
     //$this->askApi();
   }
-  public function askApi() {
+
+  function AskApi() {
+    $curl = $this->SetupCurl();
+    $result = curl_exec($curl);
+    curl_close($curl);
+    $this->SaveAnswer($result);
+    return $result;
+  }
+
+  function SetupCurl() {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_POST, 1);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: text/xml'));
-
     curl_setopt($curl, CURLOPT_URL, $this->EndPoint);
     curl_setopt($curl, CURLOPT_POSTFIELDS, $this->ApiQuestion);
+    return $curl;
+  }
 
-    $result = curl_exec($curl);
-    return $result;
+  function SaveAnswer($result){
+    $DatabaseHandler = new DatabaseHandler();
+    $DatabaseHandler->UpdateStoredDeparturesAndTime($result, time());
+    $DatabaseHandler->CloseConnection();
   }
 
 }

@@ -17,9 +17,9 @@ class Timetreshold{
   function IsTresholdReached($TimeOfLastApiCall){
     $passedMinutes = $this->GetTimePassed($TimeOfLastApiCall);
     if ($passedMinutes > $this->TresholdInMinutes) {
-      return TRUE;
+      return True;
     } else {
-      return FALSE;
+      return False;
     }
   }
 }

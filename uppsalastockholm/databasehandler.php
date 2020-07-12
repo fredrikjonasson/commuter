@@ -32,15 +32,17 @@ class DatabaseHandler{
 		$queryResult = $this->Connection->query("SELECT lastapianswer, lastcalltime FROM departures");
 		if(!$queryResult) {
 			printf("Error: %s\n", $this->Connection->sqlstate);
+			die();
 		}
 		$row = $queryResult->fetch_assoc();
 		$this->LastAPiAnswer = $row["lastapianswer"];
 		$this->LastCallTime = $row["lastcalltime"];
 	}
 
-	function SaveDeparturesAndTime($apiAnswer, $callTime){
-		if(!$this->Connection->query("INSERT INTO departures (lastapianswer, lastcalltime) VALUES ('$apiAnswer', '$callTime')")){
+	function UpdateStoredDeparturesAndTime($apiAnswer, $callTime){
+		if(!$this->Connection->query("UPDATE departures SET lastapianswer = '$apiAnswer', lastcalltime = '$callTime' WHERE id=1")){
 			printf("Error: %s\n", $this->Connection->sqlstate);
+			die();
 		}
 	}
 

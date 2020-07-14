@@ -49,7 +49,7 @@ class ApiRequest
     $result = curl_exec($curl);
     curl_close($curl);
     $responseCleaner = new ResponseCleaner();
-    $Cleanedresult = $responseCleaner->CleanResponse($result);
+    $Cleanedresult = $responseCleaner->ResponseCleanerHandler($result);
     $this->SaveAnswer($Cleanedresult);
     return $Cleanedresult;
   }

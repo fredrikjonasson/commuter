@@ -12,7 +12,7 @@ var vm = new Vue({
           return response.json();
         }).then(
           function (data) {
-            return data.RESPONSE.RESULT[0].TrainAnnouncement;
+            return data.TrainAnnouncement;
           }).catch(error => console.log(error));
       return response;
     }

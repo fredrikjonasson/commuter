@@ -1,86 +1,108 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
   <title>Uppsala - Stockholm</title>
 </head>
+
 <body>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row" style="justify-content:center;">
-      <h1>Train-departures from Uppsala to Stockholm</h1>
-      <h3 style="text-align:center">Below is the train-departures that are leaving Uppsala bound for Stockholm in the nearest hour.</h3>
-    </div>
-    <div class="row"></div>
-    <style >
-    table{
-      background:#000;
-      border-spacing: 0px;
-      margin-bottom:0px;
-    }
-    th, td, h1, h6{
-      color: yellow;
-    }
+      <div class="col-12">
 
-    .table thead th{
-      border-bottom: 2px solid #222;
-    }
-    .table td{
-      border-top: 2px solid #222;
-      border-bottom: 2px solid #222;
-    }
-  </style>
-  <div id="app" style="width:100%;">
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col"><h1>Time</h1></th>
-            <th scope="col"><h1>Train</h1></th>
-
-            <th scope="col" style="text-align:center;"><h1>Track</h1></th>
-            <th scope="col"><h1>Remarks</h1></th>
-            <th scope="col"><h1></h1></th>
-          </tr>
-        </thead>
-        <tbody v-for="responses in apiResponse">
-          <template v-if="responses.TrackAtLocation == 'x'">
-            <tr class="table-danger">
-              <td><h2>{{responses.AdvertisedTimeAtLocation}}</h2></td>
-              <td style=""><h2>{{responses.AdvertisedTrainIdent}}</h2></td>
-              <td style="text-align:center;"><h2>{{responses.TrackAtLocation}}</h2></td>
-              <template v-if="responses.OtherInformation">
-                <td><h6>{{responses.OtherInformation[0]}} <br> {{responses.OtherInformation[1]}} <br>
-                  {{responses.OtherInformation[2]}} </h6></td>
-                </template>
-                <template v-if="responses.Deviation">
-                <td><h6>{{responses.Deviation}}</h6></td>
-              </template>
-              </tr>
-            </template>
-            <template v-else>
-              <tr>
-                <td><h2>{{responses.AdvertisedTimeAtLocation}}</h2></td>
-                <td style=""><h2>{{responses.AdvertisedTrainIdent}}</h2></td>
-                <td style="text-align:center;"><h2>{{responses.TrackAtLocation}}</h2></td>
-                <template v-if="responses.OtherInformation">
-                  <td><h6>{{responses.OtherInformation[0]}} <br> {{responses.OtherInformation[1]}} <br>
-                    {{responses.OtherInformation[2]}} </h6></td>
-                  </template>
-                  <template v-if="responses.Deviation">
-                  <td><h6>{{responses.Deviation}}</h6></td>
-                </template>
-                </tr>
-              </template>
-            </tbody>
-          </table>
-          <p><b>Disclaimer:</b> The following page and its information  in no way affiliated with any official train operators. Therefore the information viewed on the page should not be substituted for your travel operators official information channels. </p>
-        </div>
-
+        <h1 class="mainheader">Train-departures from Uppsala to Stockholm</h1>
+        <h3 style="text-align:center">Below is the train-departures that are leaving Uppsala bound for Stockholm in the
+          nearest hour.</h3>
       </div>
     </div>
+    <div class="row">
+      <div class="col-12">
+        <div id="app" style="width:100%;">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">
+                    <h1>Time</h1>
+                  </th>
+                  <th scope="col" class="operatorcolumn">
+                    <h1>Operator</h1>
+                  </th>
+                  <th scope="col" class="trainnumbercolumn">
+                    <h1>Train</h1>
+                  </th>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-    <script type="text/javascript" src="./script.js?5ddcc5jj4kkd4"></script>
-  </body>
-  </html>
+                  <th scope="col" style="text-align:center;">
+                    <h1>Track</h1>
+                  </th>
+                  <th class="remarkscolumn" cope="col">
+                    <h1>Remarks</h1>
+                  </th>
+                  <th class="hidebelow576" scope="col">
+                    <h1></h1>
+                  </th>
+                </tr>
+              </thead>
+              <tbody v-for="responses in apiResponse">
+                <template v-if="responses.TrackAtLocation == 'x'">
+                  <tr class="table warningred">
+                    <td class="h2information strikethrough">{{responses.AdvertisedTimeAtLocation}}</td>
+                    <td class="h2information operatorcolumn strikethrough" style="text-align:center">
+                      {{responses.InformationOwner}}</td>
+                    <td class="h2information trainnumbercolumn strikethrough"> {{responses.AdvertisedTrainIdent}}</td>
+                    <td class="h2information strikethrough" style="text-align:center;"> {{responses.TrackAtLocation}}
+                    </td>
+                    <template v-if="responses.OtherInformation">
+                      <td class="h6information remarkscolumn strikethrough"> {{responses.OtherInformation[0]}} <br>
+                        {{responses.OtherInformation[1]}} <br>
+                        {{responses.OtherInformation[2]}} </td>
+                    </template>
+                    <template v-if="responses.Deviation">
+                      <td class="h6information deviationscolumn"> {{responses.Deviation[0]}} </td>
+                    </template>
+                    <template v-else>
+                      <td></td>
+                    </template>
+
+                  </tr>
+                </template>
+                <template v-else>
+                  <tr>
+                    <td class="h2information"> {{responses.AdvertisedTimeAtLocation}}</td>
+                    <td class="h2information operatorcolumn" style="text-align:center">
+                      {{responses.InformationOwner}}</td>
+                    <td class="h2information trainnumbercolumn"> {{responses.AdvertisedTrainIdent}}</td>
+                    <td class="h2information" style="text-align:center;"> {{responses.TrackAtLocation}}</td>
+                    <template v-if="responses.OtherInformation">
+                      <td class="h6information remarkscolumn"> {{responses.OtherInformation[0]}} <br>
+                        {{responses.OtherInformation[1]}} <br>
+                        {{responses.OtherInformation[2]}} </td>
+                    </template>
+                    <template v-if="responses.Deviation">
+                      <td class="h6information deviationscolumn"> {{responses.Deviation[0]}} </td>
+                    </template>
+                    <template v-else>
+                      <td></td>
+                    </template>
+                  </tr>
+                </template>
+              </tbody>
+            </table>
+            <p><b>Disclaimer:</b> The following page and its information in no way affiliated with any official train
+              operators. Therefore the information viewed on the page should not be substituted for your travel
+              operators official information channels. </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+  <script type="text/javascript" src="./script.js?5ddcc5jj4kkd4"></script>
+</body>
+
+</html>

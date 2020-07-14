@@ -31,6 +31,7 @@ class ApiRequest {
     <INCLUDE>TrackAtLocation</INCLUDE>
     <INCLUDE>ToLocation</INCLUDE>
     <INCLUDE>Deviation</INCLUDE>
+    <INCLUDE>InformationOwner</INCLUDE>
     <INCLUDE>OtherInformation</INCLUDE>
     </QUERY>
     </REQUEST>';

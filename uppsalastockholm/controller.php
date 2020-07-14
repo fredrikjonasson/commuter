@@ -1,7 +1,7 @@
 <?php
 require_once 'apirequest.php';
 //require_once('databasehandler.php');
-require_once '../timetreshold.php';
+require_once 'timetreshold.php';
 
 class Controller
 {

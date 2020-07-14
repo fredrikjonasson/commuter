@@ -1,6 +1,7 @@
 <?php
 
-class DatabaseHandler{
+class DatabaseHandler
+{
 	private $DbHost;
 	private $DbUser;
 	private $DbPassword;
@@ -9,28 +10,32 @@ class DatabaseHandler{
 	private $LastAPiAnswer;
 	private $LastCallTime;
 
-	function __construct(){
+	function __construct()
+	{
 		$this->EnterCredentials();
 		$this->CreateConnection();
 	}
 
-	function EnterCredentials(){
+	function EnterCredentials()
+	{
 		$this->DbHost = "localhost";
 		$this->DbUser = "root";
 		$this->DbPassword = "";
-		$this->Database = "tag";
+		$this->Database = "commuter";
 	}
 
-	function CreateConnection(){
+	function CreateConnection()
+	{
 		$this->Connection = new mysqli($this->DbHost, $this->DbUser, $this->DbPassword, $this->Database);
 		if ($this->Connection->connect_error) {
-			die("Connection failed". mysqli_connect_error());
+			die("Connection failed" . mysqli_connect_error());
 		}
 	}
 
-	function FetchDeparturesAndTime(){
+	function FetchDeparturesAndTime()
+	{
 		$queryResult = $this->Connection->query("SELECT lastapianswer, lastcalltime FROM departures");
-		if(!$queryResult) {
+		if (!$queryResult) {
 			printf("Error: %s\n", $this->Connection->sqlstate);
 			die();
 		}
@@ -39,23 +44,26 @@ class DatabaseHandler{
 		$this->LastCallTime = $row["lastcalltime"];
 	}
 
-	function UpdateStoredDeparturesAndTime($apiAnswer, $callTime){
-		if(!$this->Connection->query("UPDATE departures SET lastapianswer = '$apiAnswer', lastcalltime = '$callTime' WHERE id=1")){
+	function UpdateStoredDeparturesAndTime($apiAnswer, $callTime)
+	{
+		if (!$this->Connection->query("UPDATE departures SET lastapianswer = '$apiAnswer', lastcalltime = '$callTime' WHERE id=1")) {
 			printf("Error: %s\n", $this->Connection->sqlstate);
 			die();
 		}
 	}
 
-	function ReturnLastCallTime(){
+	function ReturnLastCallTime()
+	{
 		return $this->LastCallTime;
 	}
 
-	function ReturnLastApiAnswer(){
+	function ReturnLastApiAnswer()
+	{
 		return $this->LastAPiAnswer;
 	}
 
-	function CloseConnection(){
+	function CloseConnection()
+	{
 		$this->Connection->close();
 	}
 }
-?>

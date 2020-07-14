@@ -45,7 +45,10 @@
 
     .remarkscolumn {
       display: table-cell;
+    }
 
+    .destinationcolumn {
+      display: table-cell;
     }
 
     .warningred {
@@ -71,9 +74,25 @@
       .deviationscolumn {
         display: none;
       }
+
+      h1{
+        font-size: 27px;
+      }
+
+      .h2information {
+        font-size: 25px;
+      }
     }
 
-    @media screen and (max-width: 768px) {}
+    @media screen and (max-width: 768px) {
+      h1{
+        font-size: 27px;
+      }
+
+      .h2information {
+        font-size: 25px;
+      }
+    }
 
     @media screen and (max-width: 992px) {
 

@@ -31,6 +31,9 @@
                   <th scope="col">
                     <h1>Time</h1>
                   </th>
+                  <th scope="col" class="destinationcolumn">
+                    <h1>Destination</h1>
+                  </th>
                   <th scope="col" class="operatorcolumn">
                     <h1>Operator</h1>
                   </th>
@@ -53,6 +56,8 @@
                 <template v-if="responses.TrackAtLocation == 'x'">
                   <tr class="table warningred">
                     <td class="h2information strikethrough">{{responses.AdvertisedTimeAtLocation}}</td>
+                    <td class="h2information strikethrough destinationcolumn">{{responses.ToLocation[0].LocationName}}
+                    </td>
                     <td class="h2information operatorcolumn strikethrough" style="text-align:center">
                       {{responses.InformationOwner}}</td>
                     <td class="h2information trainnumbercolumn strikethrough"> {{responses.AdvertisedTrainIdent}}</td>
@@ -75,6 +80,7 @@
                 <template v-else>
                   <tr>
                     <td class="h2information"> {{responses.AdvertisedTimeAtLocation}}</td>
+                    <td class="h2information destinationcolumn"> {{responses.ToLocation[0].LocationName}}</td>
                     <td class="h2information operatorcolumn" style="text-align:center">
                       {{responses.InformationOwner}}</td>
                     <td class="h2information trainnumbercolumn"> {{responses.AdvertisedTrainIdent}}</td>
@@ -103,7 +109,7 @@
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-  <script type="text/javascript" src="./script.js"></script>
+  <script type="text/javascript" src="./script.js?22"></script>
 </body>
 
 </html>

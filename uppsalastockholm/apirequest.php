@@ -1,11 +1,14 @@
 <?php
 require_once 'databasehandler.php';
+require_once 'responsecleaner.php';
 
-class ApiRequest {
+class ApiRequest
+{
   private $ApiQuestion;
   private $EndPoint;
 
-  public function __construct(){
+  function __construct()
+  {
     $this->ApiQuestion = '<?xml version="1.0" encoding="utf-8"?>
     <REQUEST>
     <LOGIN authenticationkey="4cc0d9097d2e450ab7ec36ebafeed3da" />
@@ -22,7 +25,7 @@ class ApiRequest {
     </OR>
     <AND>
     <GT name="AdvertisedTimeAtLocation" value="$dateadd(-00:01:00)" />
-    <LT name="AdvertisedTimeAtLocation" value="$dateadd(02:00:00)" />
+    <LT name="AdvertisedTimeAtLocation" value="$dateadd(2:00:00)" />
     </AND>
     </AND>
     </FILTER>
@@ -40,15 +43,19 @@ class ApiRequest {
     //$this->askApi();
   }
 
-  function AskApi() {
+  function AskApi()
+  {
     $curl = $this->SetupCurl();
     $result = curl_exec($curl);
     curl_close($curl);
-    $this->SaveAnswer($result);
-    return $result;
+    $responseCleaner = new ResponseCleaner();
+    $Cleanedresult = $responseCleaner->CleanResponse($result);
+    $this->SaveAnswer($Cleanedresult);
+    return $Cleanedresult;
   }
 
-  function SetupCurl() {
+  function SetupCurl()
+  {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_POST, 1);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -58,12 +65,11 @@ class ApiRequest {
     return $curl;
   }
 
-  function SaveAnswer($result){
+  function SaveAnswer($result)
+  {
     $DatabaseHandler = new DatabaseHandler();
     $DatabaseHandler->UpdateStoredDeparturesAndTime($result, time());
     $DatabaseHandler->CloseConnection();
   }
-
 }
 //$a = new APIRequest();
-?>

@@ -18,10 +18,10 @@ class DatabaseHandler
 
 	function EnterCredentials()
 	{
-		$this->DbHost = "uppsalastockholm.se.mysql";
-		$this->DbUser = "uppsalastockholm_sedatabase";
+		$this->DbHost = "stockholmuppsala.se.mysql";
+		$this->DbUser = "stockholmuppsala_sedatabase";
 		$this->DbPassword = "pac4815luk";
-		$this->Database = "uppsalastockholm_sedatabase";
+		$this->Database = "stockholmuppsala_sedatabase";
 	}
 
 	function CreateConnection()

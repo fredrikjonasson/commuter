@@ -1,0 +1,103 @@
+    body {
+      background-color: grey;
+    }
+
+    .mainheader {
+      color: black;
+      text-align: center;
+    }
+
+    table {
+      background: #000;
+      border-spacing: 0px;
+      margin-bottom: 0px;
+    }
+
+    th,
+    td,
+    h1,
+    h6 {
+      color: yellow;
+    }
+
+    .h2information {
+      font-size: 32px;
+    }
+
+    .h6information {
+      font-size: 16px;
+    }
+
+    .table thead th {
+      border-bottom: 2px solid #222;
+      border-top: 0px;
+    }
+
+    .table td {
+      border-top: 2px solid #222;
+      border-bottom: 2px solid #222;
+    }
+
+    .operatorcolumn {
+      display: table-cell;
+      text-align:center;
+    }
+
+    .remarkscolumn {
+      display: table-cell;
+    }
+
+    .destinationcolumn {
+      display: table-cell;
+    }
+
+    .warningred {
+      background-color: red;
+    }
+
+    .strikethrough {
+      text-decoration: line-through;
+    }
+
+    .trainnumbercolumn {
+      display: table-cell;
+
+    }
+
+    .deviationscolumn {
+      display: table-cell;
+    }
+
+    @media screen and (max-width: 576px) {
+
+      .operatorcolumn,
+      .deviationscolumn {
+        display: none;
+      }
+
+      h1{
+        font-size: 27px;
+      }
+
+      .h2information {
+        font-size: 25px;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      h1{
+        font-size: 27px;
+      }
+
+      .h2information {
+        font-size: 25px;
+      }
+    }
+
+    @media screen and (max-width: 992px) {
+
+      .remarkscolumn,
+      .trainnumbercolumn {
+        display: none;
+      }
+    }

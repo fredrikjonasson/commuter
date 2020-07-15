@@ -25,8 +25,7 @@ class Controller
 	function GetRequest()
 	{
 		$TimeOfLastApiCall = $this->DatabaseHandler->ReturnLastCallTime();
-		//if ($this->Timetreshold->IsTresholdReached($TimeOfLastApiCall)) {
-		if (true) {
+		if ($this->Timetreshold->IsTresholdReached($TimeOfLastApiCall)) {
 			echo ($this->CallApi());
 		} else {
 			echo ($this->DatabaseHandler->ReturnLastApiAnswer());

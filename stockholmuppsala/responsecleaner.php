@@ -30,14 +30,14 @@ class ResponseCleaner
     function ReplaceDestinationAbbrevation($receivedResponse)
     {
         for ($i = 0; $i < count($receivedResponse->TrainAnnouncement); $i++) {
-            if ($receivedResponse->TrainAnnouncement[$i]->ToLocation[0]->LocationName == "Cst") {
-                $receivedResponse->TrainAnnouncement[$i]->ToLocation[0]->LocationName = "Stockholm Central";
-            } elseif ($receivedResponse->TrainAnnouncement[$i]->ToLocation[0]->LocationName == "Sci") {
-                $receivedResponse->TrainAnnouncement[$i]->ToLocation[0]->LocationName = "Stockholm City";
-            } elseif ($receivedResponse->TrainAnnouncement[$i]->ToLocation[0]->LocationName == "Söc") {
-                $receivedResponse->TrainAnnouncement[$i]->ToLocation[0]->LocationName = "Södertälje Centrum (via Stockholm City)";
+            if ($receivedResponse->TrainAnnouncement[$i]->FromLocation[0]->LocationName == "Cst") {
+                $receivedResponse->TrainAnnouncement[$i]->FromLocation[0]->LocationName = "Stockholm Central";
+            } elseif ($receivedResponse->TrainAnnouncement[$i]->FromLocation[0]->LocationName == "Sci") {
+                $receivedResponse->TrainAnnouncement[$i]->FromLocation[0]->LocationName = "Stockholm City";
+            } elseif ($receivedResponse->TrainAnnouncement[$i]->FromLocation[0]->LocationName == "Söc") {
+                $receivedResponse->TrainAnnouncement[$i]->FromLocation[0]->LocationName = "Södertälje Centrum (via Stockholm City)";
             } else {
-                $receivedResponse->TrainAnnouncement[$i]->ToLocation[0]->LocationName = "Either Stockholm Central or Stockholm City";
+                $receivedResponse->TrainAnnouncement[$i]->FromLocation[0]->LocationName = "Either Stockholm Central or Stockholm City";
             }
         }
         return $receivedResponse;
@@ -45,7 +45,9 @@ class ResponseCleaner
     function TrimResponse($receivedResponse)
     {
         for ($i = 0; $i < count($receivedResponse->TrainAnnouncement); $i++) {
+            unset($receivedResponse->TrainAnnouncement[$i]->FromLocation[0]->Priority);
             unset($receivedResponse->TrainAnnouncement[$i]->ToLocation[0]->Priority);
+            unset($receivedResponse->TrainAnnouncement[$i]->FromLocation[0]->Order);
             unset($receivedResponse->TrainAnnouncement[$i]->ToLocation[0]->Order);
         }
         return $receivedResponse;

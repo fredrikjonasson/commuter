@@ -7,7 +7,7 @@ var vm = new Vue({
   },
   methods: {
     callApi: function () {
-      var response = fetch('https://uppsalastockholm.se/controller.php').then(
+      var response = fetch('https://stockholmuppsala.se/controller.php').then(
         function (response) {
           return response.json();
         }).then(

@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="./style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
-  <title>Uppsala - Stockholm</title>
+  <title>Stockholm - Uppsala</title>
 </head>
 
 <body>
@@ -15,9 +15,9 @@
     <div class="row" style="justify-content:center;">
       <div class="col-12">
 
-        <h1 class="mainheader">Train-departures from Uppsala to Stockholm</h1>
-        <h3 style="text-align:center">Below are the train-departures that are leaving Uppsala bound for Stockholm in the
-          nearest hour.
+        <h1 class="mainheader">Train-departures from Stockholm to Uppsala</h1>
+        <h3 style="text-align:center">Below are the train-departures that are leaving Stockholm bound for Uppsala in the
+          nearest hours.
         </h3>
       </div>
     </div>
@@ -32,7 +32,7 @@
                     <h1>Time</h1>
                   </th>
                   <th scope="col" class="destinationcolumn">
-                    <h1>Destination</h1>
+                    <h1>Departures from</h1>
                   </th>
                   <th scope="col" class="operatorcolumn">
                     <h1>Operator</h1>
@@ -56,7 +56,7 @@
                 <template v-if="responses.TrackAtLocation == 'x'">
                   <tr class="table warningred">
                     <td class="h2information strikethrough">{{responses.AdvertisedTimeAtLocation}}</td>
-                    <td class="h2information strikethrough destinationcolumn">{{responses.ToLocation[0].LocationName}}
+                    <td class="h2information strikethrough destinationcolumn">{{responses.FromLocation[0].LocationName}}
                     </td>
                     <td class="h2information operatorcolumn strikethrough" style="text-align:center">
                       {{responses.InformationOwner}}</td>
@@ -80,7 +80,7 @@
                 <template v-else>
                   <tr>
                     <td class="h2information"> {{responses.AdvertisedTimeAtLocation}}</td>
-                    <td class="h2information destinationcolumn"> {{responses.ToLocation[0].LocationName}}</td>
+                    <td class="h2information destinationcolumn"> {{responses.FromLocation[0].LocationName}}</td>
                     <td class="h2information operatorcolumn" style="text-align:center">
                       {{responses.InformationOwner}}</td>
                     <td class="h2information trainnumbercolumn"> {{responses.AdvertisedTrainIdent}}</td>

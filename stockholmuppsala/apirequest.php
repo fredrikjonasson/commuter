@@ -10,18 +10,19 @@ class ApiRequest
   function __construct()
   {
     $this->ApiQuestion = '<?xml version="1.0" encoding="utf-8"?>
- <REQUEST>
+    <REQUEST>
     <LOGIN authenticationkey="4cc0d9097d2e450ab7ec36ebafeed3da" />
     <QUERY objecttype="TrainAnnouncement" schemaversion="1.3" orderby="AdvertisedTimeAtLocation">
     <FILTER>
     <AND>
     <EQ name="ActivityType" value="Avgang" />
-    <EQ name="LocationSignature" value="U" />
     <OR>
-    <EQ name="ViaToLocation.LocationName" value="Sci" />
-    <EQ name="ToLocation.LocationName" value="Sci" />
-    <EQ name="ViaToLocation.LocationName" value="Cst" />
-    <EQ name="ToLocation.LocationName" value="Cst" />
+    <EQ name="LocationSignature" value="Sci" />
+    <EQ name="LocationSignature" value="Cst" />
+    </OR>
+    <OR>
+    <EQ name="ViaToLocation.LocationName" value="U" />
+    <EQ name="ToLocation.LocationName" value="U" />
     </OR>
     <AND>
     <GT name="AdvertisedTimeAtLocation" value="$dateadd(-00:01:00)" />
@@ -33,6 +34,7 @@ class ApiRequest
     <INCLUDE>AdvertisedTimeAtLocation</INCLUDE>
     <INCLUDE>TrackAtLocation</INCLUDE>
     <INCLUDE>ToLocation</INCLUDE>
+    <INCLUDE>FromLocation</INCLUDE>
     <INCLUDE>Deviation</INCLUDE>
     <INCLUDE>InformationOwner</INCLUDE>
     <INCLUDE>OtherInformation</INCLUDE>
